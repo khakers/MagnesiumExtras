@@ -1,16 +1,15 @@
 package vice.rubidium_extras.mixins.FrameCounter;
 
+import com.google.common.collect.EvictingQueue;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.gui.ForgeIngameGui;
-import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import vice.rubidium_extras.config.MagnesiumExtrasConfig;
 
-import java.util.LinkedList;
 import java.util.Objects;
 import java.util.Queue;
 
@@ -20,7 +19,7 @@ public class FrameCounterMixin
 
     private int lastMeasuredFPS;
     private String runningAverageFPS;
-    private final Queue<Integer> fpsRunningAverageQueue = new LinkedList<Integer>();
+    private final Queue<Integer> fpsRunningAverageQueue = EvictingQueue.create(14);
 
     @Inject(at = @At("HEAD"), method = "render")
     public void render(PoseStack matrixStack, float tickDelta, CallbackInfo info)
@@ -42,7 +41,7 @@ public class FrameCounterMixin
         else
             displayString = String.valueOf(fps);
 
-        float textPos = (int)MagnesiumExtrasConfig.fpsCounterPosition.get();
+        float textPos = MagnesiumExtrasConfig.fpsCounterPosition.get();
 
         int textAlpha = 200;
         int textColor = 0xFFFFFF;
@@ -82,9 +81,6 @@ public class FrameCounterMixin
         {
             lastMeasuredFPS = fps;
 
-            if (fpsRunningAverageQueue.size() > 14)
-                fpsRunningAverageQueue.poll();
-
             fpsRunningAverageQueue.offer(fps);
 
             int totalFps = 0;
@@ -95,7 +91,7 @@ public class FrameCounterMixin
                 frameCount++;
             }
 
-            int average = (int) (totalFps / frameCount);
+            int average = totalFps / frameCount;
             runningAverageFPS = String.valueOf(average);
         }
 
