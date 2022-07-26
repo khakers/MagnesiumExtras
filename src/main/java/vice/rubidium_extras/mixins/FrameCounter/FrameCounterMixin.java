@@ -54,7 +54,7 @@ public class FrameCounterMixin
 
         // Prevent FPS-Display to render outside screenspace
         float maxTextPosX = client.getWindow().getGuiScaledWidth() - client.font.width(displayString);
-        float maxTextPosY = client.getWindow().getGuiScaledHeight() - client.font.lineHeight;
+//        float maxTextPosY = client.getWindow().getGuiScaledHeight() - client.font.lineHeight;
         textPos = Math.min(textPos, maxTextPosX);
 
         int drawColor = ((textAlpha & 0xFF) << 24) | textColor;

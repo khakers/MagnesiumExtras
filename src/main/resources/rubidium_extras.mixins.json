@@ -5,8 +5,7 @@
   "refmap": "rubidium_extras.refmap.json",
   "mixins": [
     "fog.MixinSodiumWorldRenderer",
-    "SodiumConfig.SodiumGameOptionsMixin",
-    "Zoom.PlayerInventoryMixin"
+    "SodiumConfig.SodiumGameOptionsMixin"
   ],
   "minVersion": "0.8",
   "client": [
@@ -22,8 +21,6 @@
     "TotalDarkness.MixinLightmapTextureManager",
     "TotalDarkness.MixinNativeImageBackedTexture",
     "TotalDarkness.MixinTheEndDimension",
-    "TotalDarkness.MixinTheNetherDimension",
-    "Zoom.GameRendererMixin",
-    "Zoom.MouseMixin"
+    "TotalDarkness.MixinTheNetherDimension"
   ]
 }
