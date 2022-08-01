@@ -28,7 +28,7 @@ displayName="Rubidium Extras" #mandatory
 #displayURL="https://change.me.to.your.mods.homepage.example.invalid/" #optional
 # A file name (in the root of the mod JAR) containing a logo for display
 logoFile="templatemod.png" #optional
-authors="TeamDeusVult" #optional
+authors="TeamDeusVult, khakers" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description='''
 Adds Extra Settings to Rubidium.
